@@ -3,13 +3,14 @@ on:
   pull_request:
   push:
     branches:
+      ## - master
       - actions
 jobs:
   learn-actions:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ ubuntu-latest, macos-latest ]
+        ## os: [ ubuntu-latest, macos-latest ]
         os: [ macos-latest ]
     steps:
       - name: Check out repository code
@@ -48,5 +49,5 @@ jobs:
               n_job=$(sysctl -n hw.ncpu)
           fi
           echo "make -j $n_job check"
-          make -j $(nproc) check
+          ## make -j $(nproc) check
       - run: echo "job.status = ${{ job.status }}"
