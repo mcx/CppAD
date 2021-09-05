@@ -48,7 +48,8 @@ jobs:
           else
               n_job=$(sysctl -n hw.ncpu)
           fi
-          echo "make -j $n_job check"
+          ## echo "make -j $n_job check"
           ## make -j $(nproc) check
+          echo "make check_example_print_for"
           make check_example_print_for
       - run: echo "job.status = ${{ job.status }}"
