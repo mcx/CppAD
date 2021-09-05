@@ -80,18 +80,13 @@ INCLUDE(cmake/set_compile_flags.cmake)
 INCLUDE(cmake/pkgconfig_info.cmake)
 # ============================================================================
 # Ensure c++11 support
-print_variable(CMAKE_CXX_FLAGS)
-print_variable(CMAKE_REQUIRED_DEFINITIONS)
-print_variable(CMAKE_REQUIRED_FLAGS)
-print_variable(CMAKE_REQUIRED_INCLUDES)
-print_variable(CMAKE_REQUIRED_LIBRARIES)
 SET(CMAKE_REQUIRED_DEFINITIONS "")
 SET(CMAKE_REQUIRED_FLAGS       "")
 SET(CMAKE_REQUIRED_INCLUDES    "")
 SET(CMAKE_REQUIRED_LIBRARIES   "")
 SET(source "
 int main(void)
-{   static_assert( __cplusplus >= 201103 , \"c++11 or higher required\" );
+{   // static_assert( __cplusplus >= 201103 , \"c++11 or higher required\" );
     return 0;
 }"
 )
