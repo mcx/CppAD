@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------------------
-CppAD: C++ Algorithmic Differentiation: Copyright (C) 2003-17 Bradley M. Bell
+CppAD: C++ Algorithmic Differentiation: Copyright (C) 2003-21 Bradley M. Bell
 
 CppAD is distributed under the terms of the
              Eclipse Public License Version 2.0.
@@ -44,6 +44,9 @@ namespace {
     using std::cout;
     using std::endl;
     using CppAD::AD;
+
+    // print __cplusplus for debugging ci_linux.yml macos-latest.
+    std::cout << "__cplusplus=" << __cplusplus << std::endl;
 
     // use of PrintFor to check for invalid function arguments
     AD<double> check_log(const AD<double>& y)

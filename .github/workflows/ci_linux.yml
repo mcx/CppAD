@@ -50,4 +50,5 @@ jobs:
           fi
           echo "make -j $n_job check"
           ## make -j $(nproc) check
+          make check_example_print_for
       - run: echo "job.status = ${{ job.status }}"
