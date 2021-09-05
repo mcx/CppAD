@@ -38,7 +38,6 @@ To build this program and run its correctness test see $cref cmake_check$$.
 
 $head Source Code$$
 $srccode%cpp% */
-# if 0
 # include <cppad/cppad.hpp>
 
 namespace {
@@ -128,12 +127,3 @@ $codep
 $$
 $end
 */
-# else
-# include <iostream>
-// retrieve __cplusplus for cl_linux.yml macos-latest test
-int main(void)
-{   std::cout << "__cplusplus = '" << __cplusplus << "'" << std::endl;
-
-    return 0;
-}
-# endif

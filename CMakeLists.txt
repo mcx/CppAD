@@ -86,7 +86,7 @@ SET(CMAKE_REQUIRED_INCLUDES    "")
 SET(CMAKE_REQUIRED_LIBRARIES   "")
 SET(source "
 int main(void)
-{   // static_assert( __cplusplus >= 201103 , \"c++11 or higher required\" );
+{   static_assert( __cplusplus >= 201103 , \"c++11 or higher required\" );
     return 0;
 }"
 )
