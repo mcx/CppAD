@@ -79,6 +79,9 @@ INCLUDE(cmake/set_compile_flags.cmake)
 # pkgconfig_info(name, system)
 INCLUDE(cmake/pkgconfig_info.cmake)
 # ============================================================================
+SET(CMAKE_CXX_STANDARD 11)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+# ============================================================================
 # Ensure c++11 support
 SET(CMAKE_REQUIRED_DEFINITIONS "")
 SET(CMAKE_REQUIRED_FLAGS       "")
