@@ -101,15 +101,13 @@ SET(source "
 # include <stdlib.h>
 # include <unistd.h>
 int main(void)
-{   char pattern[] = \"/tmp/fileXXXXXX\";
+{
+    char pattern[] = \"/tmp/fileXXXXXX\";
     int fd = mkstemp(pattern);
     return 0;
 }
 " )
-IF( DEFINED(cxx_has_mkstemp) )
-    UNSET(cxx_has_mkstemp)
-ENDIF( DEFINED(cxx_has_mkstemp) )
-CHECK_CXX_SOURCE_COMPILES("${source}" cxx_has_mkstemp)
+compile_source_test("${source}" cppad_has_mkstemp )
 # =============================================================================
 # command line arguments
 # =============================================================================

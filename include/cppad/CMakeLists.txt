@@ -27,6 +27,19 @@ SET(CMAKE_REQUIRED_DEFINITIONS "")
 SET(CMAKE_REQUIRED_FLAGS       "")
 SET(CMAKE_REQUIRED_INCLUDES    "")
 SET(CMAKE_REQUIRED_LIBRARIES   "")
+# ---------------------------------------------------------------------------
+# Extra test for mkstemp
+SET(source "
+# include <stdlib.h>
+# include <unistd.h>
+int main(void)
+{
+    char pattern[] = \"/tmp/fileXXXXXX\";
+    int fd = mkstemp(pattern);
+    return 0;
+}
+" )
+compile_source_test("${source}" cppad_has_mkstemp )
 # -----------------------------------------------------------------------------
 # compiler_has_conversion_warn
 SET( clang_or_gnu 0 )
