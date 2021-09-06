@@ -23,7 +23,7 @@ IF( POLICY CMP0054 )
 ENDIF( POLICY CMP0054 )
 #
 # cppad_version is used by version.sh to get the version number.
-SET(cppad_version "20210904")
+SET(cppad_version "20210905")
 SET(cppad_url          "https://coin-or.github.io/CppAD" )
 SET(cppad_description  "Differentiation of C++ Algorithms" )
 #
@@ -95,23 +95,6 @@ IF( NOT cplusplus_201100_ok  )
     SET(CMAKE_CXX_STANDARD 11)
     SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 ENDIF( NOT cplusplus_201100_ok  )
-# ---------------------------------------------------------------------------
-# Extra test for mkstemp
-SET(source "
-# include <stdlib.h>
-# include <unistd.h>
-int main(void)
-{
-    char pattern[] = \"/tmp/fileXXXXXX\";
-    int fd = mkstemp(pattern);
-    return 0;
-}
-" )
-IF( DEFINED(cxx_has_mkstemp) )
-    UNSET(cxx_has_mkstemp)
-ENDIF( DEFINED(cxx_has_mkstemp) )
-compile_source_test("${source}" cxx_has_mkstemp )
-print_variable( cxx_has_mkstemp )
 # =============================================================================
 # command line arguments
 # =============================================================================
