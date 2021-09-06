@@ -111,6 +111,7 @@ IF( DEFINED(cxx_has_mkstemp) )
     UNSET(cxx_has_mkstemp)
 ENDIF( DEFINED(cxx_has_mkstemp) )
 compile_source_test("${source}" cxx_has_mkstemp )
+print_variable( cxx_has_mkstemp )
 # =============================================================================
 # command line arguments
 # =============================================================================
