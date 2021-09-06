@@ -95,6 +95,21 @@ IF( NOT cplusplus_201100_ok  )
     SET(CMAKE_CXX_STANDARD 11)
     SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 ENDIF( NOT cplusplus_201100_ok  )
+# ---------------------------------------------------------------------------
+# Extra test for mkstemp
+SET(source "
+# include <stdlib.h>
+# include <unistd.h>
+int main(void)
+{   char pattern[] = \"/tmp/fileXXXXXX\";
+    int fd = mkstemp(pattern);
+    return 0;
+}
+" )
+IF( DEFINED(cxx_has_mkstemp) )
+    UNSET(cxx_has_mkstemp)
+ENDIF( DEFINED(cxx_has_mkstemp) )
+CHECK_CXX_SOURCE_COMPILES("${source}" cxx_has_mkstemp)
 # =============================================================================
 # command line arguments
 # =============================================================================
