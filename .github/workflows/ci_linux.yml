@@ -1,4 +1,4 @@
-name: Linux Github Actions
+name: Linux Github Actions Test
 on: workflow_dispatch
 ## on:
   ## pull_request:
