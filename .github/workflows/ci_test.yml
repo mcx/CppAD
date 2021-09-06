@@ -1,10 +1,9 @@
 name: Linux Github Actions Test
-on: workflow_dispatch
-## on:
+on:
   ## pull_request:
-  ## push:
-    ## branches:
-      ## - master
+  push:
+    branches:
+      - actions
 jobs:
   learn-actions:
     runs-on: ${{ matrix.os }}
