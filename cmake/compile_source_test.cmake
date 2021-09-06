@@ -27,11 +27,11 @@
 FUNCTION(compile_source_test source variable)
     #
     # check that variable is not yet defined
-    ## IF( DEFINED ${variable} )
-      ##   MESSAGE(FATAL_ERROR
-        ##     "compile_source_test: ${variable} is defined before expected"
-        ## )
-    ## ENDIF( DEFINED ${variable} )
+    IF( DEFINED ${variable} )
+        MESSAGE(FATAL_ERROR
+            "compile_source_test: ${variable} is defined before expected"
+        )
+    ENDIF( DEFINED ${variable} )
     #
     IF( DEFINED compiles_source_test_result)
         UNSET(compiles_source_test_result)
@@ -55,4 +55,4 @@ FUNCTION(compile_source_test source variable)
     ENDIF( NOT DEFINED ${variable} )
     #
     MESSAGE(STATUS "${variable} = ${${variable}}" )
-ENDMACRO( compile_source_test )
+ENDFUNCTION( compile_source_test )
