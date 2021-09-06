@@ -38,21 +38,21 @@ MACRO(compile_source_test source variable)
     ENDIF( DEFINED compiles_source_test_result )
     #
     # check that source codee compiles
-    CHECK_CXX_SOURCE_COMPILES("${source}" compiles_source_test_result )
+    CHECK_CXX_SOURCE_COMPILES("${source}" ${variable} )
     #
     # change result varialbe to 0 (1) for fail (succeed).
-    IF( compile_source_test_result )
-        SET(${variable} 1)
-    ELSE( compiles_source_test_result )
-        SET(${variable} 0)
-    ENDIF( compile_source_test_result )
-    #
-    # check that varialbe is defined
-    IF( NOT DEFINED ${variable} )
-        MESSAGE(FATAL_ERROR
-            "compile_source_test: error in CMake script."
-        )
-    ENDIF( NOT DEFINED ${variable} )
+##    IF( compile_source_test_result )
+##        SET(${variable} 1)
+##    ELSE( compiles_source_test_result )
+##        SET(${variable} 0)
+##    ENDIF( compile_source_test_result )
+##    #
+##    # check that varialbe is defined
+##    IF( NOT DEFINED ${variable} )
+##        MESSAGE(FATAL_ERROR
+##            "compile_source_test: error in CMake script."
+##        )
+##    ENDIF( NOT DEFINED ${variable} )
     #
     MESSAGE(STATUS "${variable} = ${${variable}}" )
 ENDMACRO( compile_source_test )
