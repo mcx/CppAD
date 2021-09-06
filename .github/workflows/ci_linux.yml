@@ -1,15 +1,17 @@
 name: Linux Github Actions
-on:
-  pull_request:
-  push:
-    branches:
-      - master
+on: workflow_dispatch
+## on:
+  ## pull_request:
+  ## push:
+    ## branches:
+      ## - master
 jobs:
   learn-actions:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ macos-latest ]
+        ## os: [ ubuntu-latest, macos-latest ]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -47,5 +49,5 @@ jobs:
               n_job=$(sysctl -n hw.ncpu)
           fi
           echo "make -j $n_job check"
-          make -j $(nproc) check
+          ## make -j $(nproc) check
       - run: echo "job.status = ${{ job.status }}"
