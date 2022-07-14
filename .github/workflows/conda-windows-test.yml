@@ -17,5 +17,24 @@ jobs:
       - name: install cmake and eigen
         shell: cmd /C CALL {0}
         run: |
+          echo conda install cmake eigen
           conda install cmake eigen
+          REM
+          echo conda list --name myenv
           conda list --name myenv
+          REM
+          echo dir eigen3.pc /S
+          dir eigen3.pc
+          REM
+          echo dir Eigen /S
+          dir Eigen /S
+          REM
+          echo CONDA_PREFIX=%CONDA_PREFIX
+          echo cd %CONDA_PREFIX%
+          cd %CONDA_PREFIX%
+          REM
+          echo dir eigen3.pc /S
+          dir eigen3.pc
+          REM
+          echo dir Eigen /S
+          dir Eigen /S
