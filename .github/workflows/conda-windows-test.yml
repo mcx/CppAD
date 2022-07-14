@@ -1,9 +1,4 @@
 # Testing conda on windows
-name: conda - windows - test
-on:
-  push:
-    - workflow
-
 jobs:
   test-conda-windows:
     name: Test conda Windows
