@@ -16,25 +16,19 @@ jobs:
           activate-environment: myenv
       - name: install cmake and eigen
         shell: cmd /C CALL {0}
-        run: |
-          echo conda install cmake eigen
-          conda install cmake eigen
-          REM
-          echo conda list --name myenv
-          conda list --name myenv
-          REM
-          echo dir eigen3.pc /S
-          dir eigen3.pc
-          REM
-          echo dir Eigen /S
-          dir Eigen /S
-          REM
-          echo CONDA_PREFIX=%CONDA_PREFIX
-          echo cd %CONDA_PREFIX%
-          cd %CONDA_PREFIX%
-          REM
-          echo dir eigen3.pc /S
-          dir eigen3.pc
-          REM
-          echo dir Eigen /S
-          dir Eigen /S
+        steps:
+          - run: echo conda install cmake eigen
+          - run:      conda install cmake eigen
+          - run: echo conda list --name myenv
+          - run:      conda list --name myenv
+          - run: echo dir eigen3.pc /S
+          - run:      dir eigen3.pc
+          - run: echo dir Eigen /S
+          - run:      dir Eigen /S
+          - run: echo CONDA_PREFIX=%CONDA_PREFIX
+          - run: echo cd %CONDA_PREFIX%
+          - run:      cd %CONDA_PREFIX%
+          - run: echo dir eigen3.pc /S
+          - run:      dir eigen3.pc
+          - run: echo dir Eigen /S
+          - run:      dir Eigen /S
