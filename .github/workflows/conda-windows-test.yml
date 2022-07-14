@@ -1,0 +1,34 @@
+# Testing conda on windows
+name: conda - windows - test
+on:
+  push:
+    - workflow
+
+jobs:
+  test-conda-windows:
+    name: Test conda Windows
+    runs-on: "windows-latest"
+    steps:
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          activate-environment: myenv
+      - name: Bash
+        shell: bash -l {0}
+        run: |
+          conda info
+          conda list
+      - name: PowerShell
+        shell: powershell
+        run: |
+          conda info
+          conda list
+      - name: PowerShell Core
+        shell: pwsh
+        run: |
+          conda info
+          conda list
+      - name: Cmd.exe
+        shell: cmd /C CALL {0}
+        run: >-
+          conda info && conda list
