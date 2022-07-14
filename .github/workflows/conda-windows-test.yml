@@ -14,22 +14,8 @@ jobs:
         with:
           miniconda-version: "latest"
           activate-environment: myenv
-      - name: Bash
-        shell: bash -l {0}
-        run: |
-          conda info
-          conda list
-      - name: PowerShell
-        shell: powershell
-        run: |
-          conda info
-          conda list
-      - name: PowerShell Core
-        shell: pwsh
-        run: |
-          conda info
-          conda list
-      - name: Cmd.exe
+      - name: install: cmake, eigen
         shell: cmd /C CALL {0}
-        run: >-
-          conda info && conda list
+        run: |
+          conda install cmake eigen
+          conda list --name myenv
