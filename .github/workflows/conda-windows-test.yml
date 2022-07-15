@@ -32,16 +32,18 @@ jobs:
     - name: Install cmake and eigne
       run: |
         conda install cmake eigen
-    - name: Build CppAD
+    - name: create myenv conda environment
       shell: cmd /C CALL {0}
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: |
         echo conda create --yes --name myenv
              conda create --yes --name myenv
-      run: |
         echo conda active myenv
              conda activate myenv
+    - name: install cmake and eigen
+      shell: cmd /C CALL {0}
+      env:
       run: |
         echo conda install --yes cmake eigen
              conda install --yes cmake eigen
