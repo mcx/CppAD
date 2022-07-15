@@ -14,27 +14,11 @@ jobs:
         with:
           miniconda-version: "latest"
           activate-environment: myenv
+
       - name: install cmake and eigen
         shell: cmd /C CALL {0}
-        steps:
-          - name: conda install cmake eigen
-            run:  conda install cmake eigen
-
-          - name: conda list --name myenv
-            run:  conda list --name myenv
-
-          - name: dir eigen3.pc /S
-            run:  dir eigen3.pc
-
-          - name: dir Eigen /S
-            run:  dir Eigen /S
-
-          - name: cd %CONDA_PREFIX%
-            run:  cd %CONDA_PREFIX%
-            run:  echo CONDA_PREFIX=%CONDA_PREFIX
-
-          - name: dir eigen3.pc /S
-            run:  dir eigen3.pc
-
-          - name: dir Eigen /S
-            run:  dir Eigen /S
+        run: |
+            echo conda install cmake eigen
+            conda list --name myenv
+            echo dir eigen3.pc /S
+            dir eigen3.pc
