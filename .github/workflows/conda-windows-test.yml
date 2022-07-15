@@ -39,10 +39,13 @@ jobs:
       run: |
         echo conda create --yes --name myenv
              conda create --yes --name myenv
+      run: |
         echo conda active myenv
              conda activate myenv
+      run: |
         echo conda install --yes cmake eigen
              conda install --yes cmake eigen
+      run: |
         echo CONDA_PREFIX = %CONDA_PREFIX%
              cd %CONDA_PREFIX%
         echo dir
