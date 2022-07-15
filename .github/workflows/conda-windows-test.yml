@@ -26,30 +26,23 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       with:
-        activate-environment: cppad
+        activate-environment: myenv
         environment-file: .github/workflows/conda/conda-env.yml
         python-version: 3.7
-    - name: Install cmake and eigne
-      run: |
-        conda install cmake eigen
-    - name: create myenv conda environment
-      shell: cmd /C CALL {0}
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-      run: |
-        echo conda create --yes --name myenv
-             conda create --yes --name myenv
-        echo conda active myenv
-             conda activate myenv
-    - name: install cmake and eigen
+    - name: Install cmake and eigen
       shell: cmd /C CALL {0}
       run: |
-        echo conda install --yes cmake eigen
-             conda install --yes cmake eigen
+        conda install --yes cmake eigen
     - name: search for Eigen directory
       shell: cmd /C CALL {0}
       run: |
+        echo cd
+             cd
+        echo dir
+             dir
         echo CONDA_PREFIX = %CONDA_PREFIX%
              cd %CONDA_PREFIX%
         echo dir
              dir
+        echo dir pkgconfig /S
+             dir pkgconfig /S
