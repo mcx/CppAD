@@ -37,12 +37,10 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: |
-        echo conda update -n base -c defaults conda
-             conda update -n base -c defaults conda
         echo conda create --yes --name myenv
              conda create --yes --name myenv
         echo conda active myenv
-             conad activate myenv
+             conda activate myenv
         echo conda install --yes cmake eigen
              conda install --yes cmake eigen
         echo CONDA_PREFIX = %CONDA_PREFIX%
