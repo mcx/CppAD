@@ -29,19 +29,17 @@ jobs:
         activate-environment: cppad
         environment-file: .github/workflows/conda/conda-env.yml
         python-version: 3.7
-    - name: Install cmake and update conda
+    - name: Install cmake and eigne
       run: |
-        conda install cmake -c main
+        conda install cmake eigen
     - name: Build CppAD
       shell: cmd /C CALL {0}
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: |
-        echo cd %CONDA_PREFIX%
+        echo CONDA_PREFIX = %CONDA_PREFIX%
              cd %CONDA_PREFIX%
         echo dir
              dir
-        echo dir Eigen /S
-             dir Eigen /S
-        echo dir eigen.pc /S
-             dir eigen.pc /S
+        echo dir pkgconfig /S
+             dir pkgconfig /S
