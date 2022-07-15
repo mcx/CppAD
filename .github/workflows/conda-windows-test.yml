@@ -1,21 +1,50 @@
-# Testing conda on windows
-name: conda - windows - test
+name: conda - windows - clang
 on:
+  pull_request:
   push:
     branches:
-      - workflow
+      - master
+      - 'stable/*'
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
 
 jobs:
-  test-conda-windows:
-    name: Test conda Windows
-    runs-on: "windows-latest"
-    steps:
-      - uses: conda-incubator/setup-miniconda@v2
-        with:
-          miniconda-version: "latest"
-          activate-environment: myenv
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        name: [windows-latest-clang-cl]
 
-      - name: install cmake and eigen
-        shell: cmd /C CALL {0}
-        run: conda list --name myenv
-        run: dir eigen3.pc
+        include:
+          - name: windows-latest-clang-cl
+            os: windows-2019
+            compiler: clang-cl
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout submodules
+      run: |
+        git submodule update --init
+    - uses: goanpeca/setup-miniconda@v1
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      with:
+        activate-environment: cppad
+        environment-file: .github/workflows/conda/conda-env.yml
+        python-version: 3.7
+    - name: Install cmake and update conda
+      run: |
+        conda install cmake -c main
+    - name: Build CppAD
+      shell: cmd /C CALL {0}
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+      run: |
+        echo CONDA_PREFIX=%CONDA_PREFIX%
+        echo dir Eigen /S
+             dir Eigen /S
+        echo dir eigen.pc /S
+             dir eigen.pc /S
