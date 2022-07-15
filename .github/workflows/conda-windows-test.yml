@@ -37,7 +37,10 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: |
-        echo CONDA_PREFIX=%CONDA_PREFIX%
+        echo cd %CONDA_PREFIX%
+             cd %CONDA_PREFIX%
+        echo dir
+             dir
         echo dir Eigen /S
              dir Eigen /S
         echo dir eigen.pc /S
