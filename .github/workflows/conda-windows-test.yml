@@ -43,10 +43,11 @@ jobs:
              conda activate myenv
     - name: install cmake and eigen
       shell: cmd /C CALL {0}
-      env:
       run: |
         echo conda install --yes cmake eigen
              conda install --yes cmake eigen
+    - name: search for Eigen directory
+      shell: cmd /C CALL {0}
       run: |
         echo CONDA_PREFIX = %CONDA_PREFIX%
              cd %CONDA_PREFIX%
