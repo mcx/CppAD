@@ -17,8 +17,5 @@ jobs:
 
       - name: install cmake and eigen
         shell: cmd /C CALL {0}
-        run: |
-            echo conda install cmake eigen
-            conda list --name myenv
-            echo dir eigen3.pc /S
-            dir eigen3.pc
+        run: conda list --name myenv
+        run: dir eigen3.pc
