@@ -6,6 +6,10 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        cmake_eigen [ include_eigen=true, eigen_prefix=%eigen3_dir% ]
+
     runs-on: windows-2019
 
     steps:
@@ -24,22 +28,14 @@ jobs:
       shell: cmd /C CALL {0}
       run: |
         conda install --yes cmake eigen
-    - name: search for Eigen directory
+    - name: Check location of eigen3.pc file and Eigen directory
       shell: cmd /C CALL {0}
       run: |
-        echo cd = %cd%
-        echo where cmake
-             where cmake
-        echo CONDA_PREFIX = %CONDA_PREFIX%
-        echo dir %CONDA_PREFIX%
-             dir %CONDA_PREFIX%
-        echo dir %CONDA_PREFIX%\include
-             dir %CONDA_PREFIX%\include
-        echo dir %CONDA_PREFIX%\Library\share\pkgconfig
-             dir %CONDA_PREFIX%\Library\share\pkgconfig
-        echo dir %CONDA_PREFIX%\Library\include\eigen3
-             dir %CONDA_PREFIX%\Library\include\eigen3
-    - name: search for Eigen directory
+        echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
+             dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
+        echo dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
+             dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
+    - name: Build and test with $${matrix.cmake_eigen}}
       shell: cmd /C CALL {0}
       run: |
         echo mkdir build
@@ -50,5 +46,5 @@ jobs:
              set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
         echo set eigen3_dir=%CONDA_PREFIX%\Library\include\eigen3
              set eigen3_dir=%CONDA_PREFIX%\Library\include\eigen3
-        echo cmake -G "Visual Studio 16 2019"  -D include_eigen=true ..
-             cmake -G "Visual Studio 16 2019"  -D include_eigen=true ..
+        echo cmake -G "Visual Studio 16 2019"  -D ${{matrix.cmake_eigen}} ..
+             cmake -G "Visual Studio 16 2019"  -D ${{matrix.cmake_eigen}} ..
