@@ -56,5 +56,15 @@ jobs:
           -D cmake_install_includedirs=include;eigen3 ^
           ..
         REM Only run test using the last configuration
-        echo cmake --build . --target check_test_more_general check_speed
-             cmake --build . --target check_test_more_general check_speed
+        echo cmake --build . --target ^
+          check_example ^
+          check_introduction ^
+          check_test_more ^
+          check_speed ^
+          check_cppad_ipopt
+        cmake --build . --target ^
+          check_test_more ^
+          check_speed ^
+          check_example ^
+          check_introduction ^
+          check_cppad_ipopt
