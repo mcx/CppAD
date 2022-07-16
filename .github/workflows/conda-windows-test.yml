@@ -22,8 +22,6 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       with:
         activate-environment: myenv
-        environment-file: .github/workflows/conda/conda-env.yml
-        python-version: 3.7
     - name: Install cmake and eigen
       shell: cmd /C CALL {0}
       run: |
@@ -56,3 +54,5 @@ jobs:
           -D ${{matrix.cmake_eigen}} ^
           -D cmake_install_includedirs=include;eigen3 ^
           ..
+        echo cmake --build . --target check --parallel 1
+             cmake --build . --target check --parallel 1
