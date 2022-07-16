@@ -11,7 +11,6 @@ jobs:
       fail-fast: true
       matrix:
         name: [windows-latest-clang-cl]
-
         include:
           - name: windows-latest-clang-cl
             os: windows-2019
@@ -55,7 +54,9 @@ jobs:
              mkdir build
         echo cd build
              cd build
-        echo set  PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
-             set  PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
-        echo cmake -G "Visual Studio 16 2019"  -D include_eigen ..
-             cmake -G "Visual Studio 16 2019"  -D include_eigen ..
+        echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+             set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+        echo set eigen3_dir=%CONDA_PREFIX%\Library\include\eigen3
+             set eigen3_dir=%CONDA_PREFIX%\Library\include\eigen3
+        echo cmake -G "Visual Studio 16 2019"  -D include_eigen=true ..
+             cmake -G "Visual Studio 16 2019"  -D include_eigen=true ..
