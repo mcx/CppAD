@@ -6,15 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: true
-      matrix:
-        name: [windows-latest-clang-cl]
-        include:
-          - name: windows-latest-clang-cl
-            os: windows-2019
-            compiler: clang-cl
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
