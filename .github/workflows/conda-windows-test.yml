@@ -44,5 +44,7 @@ jobs:
              dir %CONDA_PREFIX%
         echo dir %CONDA_PREFIX%\include
              dir %CONDA_PREFIX%\include
-        echo dir %CONDA_PREFIX%\Library
-             dir %CONDA_PREFIX%\Library
+        echo dir %CONDA_PREFIX%\Library\share
+             dir %CONDA_PREFIX%\Library\share
+        echo dir %CONDA_PREFIX%\Library\include
+             dir %CONDA_PREFIX%\Library\include
