@@ -33,8 +33,8 @@ jobs:
       run: |
         echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
              dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
-        echo dir %CONDA_PREFIX%\Library\include\Eigen
-             dir %CONDA_PREFIX%\Library\include\Eigen
+        echo dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
+             dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
     - name: Build and test with $${matrix.cmake_eigen}}
       shell: cmd /C CALL {0}
       run: |
@@ -44,7 +44,15 @@ jobs:
              cd build
         echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
              set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
-        echo set eigen3_dir=%CONDA_PREFIX%\Library
-             set eigen3_dir=%CONDA_PREFIX%\Library
-        echo cmake -G "Visual Studio 16 2019"  -D ${{matrix.cmake_eigen}} ..
-             cmake -G "Visual Studio 16 2019"  -D ${{matrix.cmake_eigen}} ..
+        echo set eigen3_dir=%CONDA_PREFIX%\Library\include
+             set eigen3_dir=%CONDA_PREFIX%\Library\include
+        echo cmake ^
+          -G "Visual Studio 16 2019"  ^
+          -D ${{matrix.cmake_eigen}} ^
+          -D cmake_install_includedirs=include;eigen3 ^
+          ..
+        cmake ^
+          -G "Visual Studio 16 2019"  ^
+          -D ${{matrix.cmake_eigen}} ^
+          -D cmake_install_includedirs=include;eigen3 ^
+          ..
