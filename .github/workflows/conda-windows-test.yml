@@ -10,9 +10,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Checkout submodules
-      run: |
-        git submodule update --init
     - uses: goanpeca/setup-miniconda@v1
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
@@ -59,5 +56,5 @@ jobs:
           -D cmake_install_includedirs=include;eigen3 ^
           ..
         REM Only run test using the last configuration
-        echo cmake --build . --target check
-             cmake --build . --target check
+        echo cmake --build . --target check_test_more_general check_speed
+             cmake --build . --target check_test_more_general check_speed
