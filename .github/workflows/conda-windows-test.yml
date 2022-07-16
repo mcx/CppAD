@@ -6,10 +6,6 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        cmake_eigen: [ include_eigen=true, eigen_prefix=%eigen3_dir% ]
-
     runs-on: windows-2019
 
     steps:
@@ -46,13 +42,13 @@ jobs:
         echo set eigen_prefix=%CONDA_PREFIX%\Library\include
              set eigen_prefix=%CONDA_PREFIX%\Library\include
         echo Configure using include_eigen
-        REM configure for release build to save execution time
         cmake ^
           -D CMAKE_BUILD_TYPE=release ^
           -G "Visual Studio 16 2019"  ^
           -D include_eigen=true ^
           -D cmake_install_includedirs=include;eigen3 ^
           ..
+        echo Remove configure results
         echo del CMakeCache.txt
              del CMakeCache.txt
         echo Configure using eigen_prefix
@@ -62,6 +58,6 @@ jobs:
           -D eigen_prefix=%eigen_prefix% ^
           -D cmake_install_includedirs=include;eigen3 ^
           ..
-        REM Only run test for last configure (to save on time).
-        echo cmake --build check --target check --parallel 1
-             cmake --build check --target check --parallel 1
+        REM Only run test using the last configuration
+        echo cmake --build . --target check --parallel 1
+             cmake --build . --target check --parallel 1
