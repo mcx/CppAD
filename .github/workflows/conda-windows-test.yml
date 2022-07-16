@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        cmake_eigen [ include_eigen=true, eigen_prefix=%eigen3_dir% ]
+        cmake_eigen: [ include_eigen=true, eigen_prefix=%eigen3_dir% ]
 
     runs-on: windows-2019
 
