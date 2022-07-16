@@ -9,60 +9,60 @@ jobs:
     runs-on: windows-2019
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: conda-incubator/setup-miniconda@v2
-        with:
-          miniconda-version: "latest"
-          activate-environment: myenv
-    - name: Install cmake and eigen
-      shell: cmd /C CALL {0}
-      run: |
-        conda install --yes cmake eigen
-    - name: Check location of eigen3.pc file and Eigen directory
-      shell: cmd /C CALL {0}
-      run: |
-        echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
-             dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
-        echo dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
-             dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
-    - name: Build and test
-      shell: cmd /C CALL {0}
-      run: |
-        echo mkdir build
-             mkdir build
-        echo cd build
-             cd build
-        echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
-             set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
-        echo set eigen_prefix=%CONDA_PREFIX%\Library\include
-             set eigen_prefix=%CONDA_PREFIX%\Library\include
-        echo Configure using include_eigen
-        cmake ^
-          -D CMAKE_BUILD_TYPE=release ^
-          -G "Visual Studio 16 2019"  ^
-          -D include_eigen=true ^
-          -D cmake_install_includedirs=include;eigen3 ^
-          ..
-        echo Remove configure results
-        echo del CMakeCache.txt
-             del CMakeCache.txt
-        echo Configure using eigen_prefix
-        cmake ^
-          -D CMAKE_BUILD_TYPE=release ^
-          -G "Visual Studio 16 2019"  ^
-          -D eigen_prefix=%eigen_prefix% ^
-          -D cmake_install_includedirs=include;eigen3 ^
-          ..
-        REM Only run test using the last configuration
-        echo cmake --build . --target ^
-          check_example ^
-          check_introduction ^
-          check_test_more ^
-          check_speed ^
-          check_cppad_ipopt
-        cmake --build . --target ^
-          check_test_more ^
-          check_speed ^
-          check_example ^
-          check_introduction ^
-          check_cppad_ipopt
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+          with:
+            miniconda-version: "latest"
+            activate-environment: myenv
+      - name: Install cmake and eigen
+        shell: cmd /C CALL {0}
+        run: |
+          conda install --yes cmake eigen
+      - name: Check location of eigen3.pc file and Eigen directory
+        shell: cmd /C CALL {0}
+        run: |
+          echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
+               dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
+          echo dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
+               dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
+      - name: Build and test
+        shell: cmd /C CALL {0}
+        run: |
+          echo mkdir build
+               mkdir build
+          echo cd build
+               cd build
+          echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+               set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+          echo set eigen_prefix=%CONDA_PREFIX%\Library\include
+               set eigen_prefix=%CONDA_PREFIX%\Library\include
+          echo Configure using include_eigen
+          cmake ^
+            -D CMAKE_BUILD_TYPE=release ^
+            -G "Visual Studio 16 2019"  ^
+            -D include_eigen=true ^
+            -D cmake_install_includedirs=include;eigen3 ^
+            ..
+          echo Remove configure results
+          echo del CMakeCache.txt
+               del CMakeCache.txt
+          echo Configure using eigen_prefix
+          cmake ^
+            -D CMAKE_BUILD_TYPE=release ^
+            -G "Visual Studio 16 2019"  ^
+            -D eigen_prefix=%eigen_prefix% ^
+            -D cmake_install_includedirs=include;eigen3 ^
+            ..
+          REM Only run test using the last configuration
+          echo cmake --build . --target ^
+            check_example ^
+            check_introduction ^
+            check_test_more ^
+            check_speed ^
+            check_cppad_ipopt
+          cmake --build . --target ^
+            check_test_more ^
+            check_speed ^
+            check_example ^
+            check_introduction ^
+            check_cppad_ipopt
