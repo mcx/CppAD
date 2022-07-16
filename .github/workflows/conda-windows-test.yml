@@ -43,17 +43,25 @@ jobs:
              cd build
         echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
              set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
-        echo set eigen3_dir=%CONDA_PREFIX%\Library\include
-             set eigen3_dir=%CONDA_PREFIX%\Library\include
-        echo cmake ^
-          -G "Visual Studio 16 2019"  ^
-          -D ${{matrix.cmake_eigen}} ^
-          -D cmake_install_includedirs=include;eigen3 ^
-          ..
+        echo set eigen_prefix=%CONDA_PREFIX%\Library\include
+             set eigen_prefix=%CONDA_PREFIX%\Library\include
+        echo Configure using include_eigen
+        REM configure for release build to save execution time
         cmake ^
+          -D CMAKE_BUILD_TYPE=release ^
           -G "Visual Studio 16 2019"  ^
-          -D ${{matrix.cmake_eigen}} ^
+          -D include_eigen=true ^
           -D cmake_install_includedirs=include;eigen3 ^
           ..
-        echo cmake --build . --target check --parallel 1
-             cmake --build . --target check --parallel 1
+        echo del CMakeCache.txt
+             del CMakeCache.txt
+        echo Configure using eigen_prefix
+        cmake ^
+          -D CMAKE_BUILD_TYPE=release ^
+          -G "Visual Studio 16 2019"  ^
+          -D eigen_prefix=%eigen_prefix% ^
+          -D cmake_install_includedirs=include;eigen3 ^
+          ..
+        REM Only run test for last configure (to save on time).
+        echo cmake --build check --target check --parallel 1
+             cmake --build check --target check --parallel 1
