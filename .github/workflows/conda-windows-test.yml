@@ -22,8 +22,11 @@ jobs:
     - name: Check location of eigen3.pc file and Eigen directory
       shell: cmd /C CALL {0}
       run: |
-        echo dir %CONDA_PREFIX%\Library
-             dir %CONDA_PREFIX%\Library
+        echo dir %CONDA_PREFIX%\Library\share
+             dir %CONDA_PREFIX%\Library\share
+        echo dir %CONDA_PREFIX%\Library\include
+             dir %CONDA_PREFIX%\Library\include
+        echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
         echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
              dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
         echo dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
