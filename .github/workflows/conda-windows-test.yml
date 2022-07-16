@@ -44,7 +44,7 @@ jobs:
              dir %CONDA_PREFIX%
         echo dir %CONDA_PREFIX%\include
              dir %CONDA_PREFIX%\include
-        echo dir %CONDA_PREFIX%\Library\share
-             dir %CONDA_PREFIX%\Library\share
-        echo dir %CONDA_PREFIX%\Library\include
-             dir %CONDA_PREFIX%\Library\include
+        echo dir %CONDA_PREFIX%\Library\share\pkgconfig
+             dir %CONDA_PREFIX%\Library\share\pkgconfig
+        echo dir %CONDA_PREFIX%\Library\include\eigen3
+             dir %CONDA_PREFIX%\Library\include\eigen3
