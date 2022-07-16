@@ -23,7 +23,7 @@ IF( POLICY CMP0054 )
 ENDIF( POLICY CMP0054 )
 #
 # cppad_version is used by version.sh to get the version number.
-SET(cppad_version "20220714")
+SET(cppad_version "20220716")
 SET(cppad_url          "https://coin-or.github.io/CppAD" )
 SET(cppad_description  "Differentiation of C++ Algorithms" )
 #
@@ -291,6 +291,9 @@ SET(system_include TRUE)
 # eigen
 IF( ${include_eigen} )
     pkgconfig_info(eigen ${system_include})
+    IF( DEFINED eigen_prefix )
+        MESSAGE(FATAL_ERROR "include_eigen is true and eigen_prefix is defined")
+    ENDIF( )
 ELSE( )
     prefix_info(eigen ${system_include} )
 ENDIF( )
