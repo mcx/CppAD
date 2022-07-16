@@ -36,9 +36,13 @@ jobs:
     - name: search for Eigen directory
       shell: cmd /C CALL {0}
       run: |
+        echo cd = %cd%
         echo where cmake
              where cmake
         echo CONDA_PREFIX = %CONDA_PREFIX%
-        echo cd = %cd%
+        echo dir %CONDA_PREFIX%
+             dir %CONDA_PREFIX%
+        echo cd %COMDA_PREFIX%
+             cd %CONDA_PREFIX%
         echo dir
              dir
