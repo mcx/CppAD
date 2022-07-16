@@ -21,7 +21,8 @@ jobs:
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       with:
-        activate-environment: myenv
+        activate-environment: cppad
+        environment-file: .github/workflows/conda/conda-env.yml
     - name: Install cmake and eigen
       shell: cmd /C CALL {0}
       run: |
