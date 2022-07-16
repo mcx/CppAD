@@ -22,13 +22,12 @@ jobs:
     - name: Check location of eigen3.pc file and Eigen directory
       shell: cmd /C CALL {0}
       run: |
-        echo dir %CONDA_PREFIX%\Library\lib
-             dir %CONDA_PREFIX%\Library\lib
+        echo dir %CONDA_PREFIX%\Library\lib\pkgconfig
+             dir %CONDA_PREFIX%\Library\lib\pkgconfig
         echo dir %CONDA_PREFIX%\Library\include\Eigen
              dir %CONDA_PREFIX%\Library\include\Eigen
-        echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
-        echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
-             dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
+        echo dir %CONDA_PREFIX%\Library\lib\pkgconfig\eigen3.pc
+             dir %CONDA_PREFIX%\Library\lib\pkgconfig\eigen3.pc
     - name: Build and test
       shell: cmd /C CALL {0}
       run: |
@@ -36,8 +35,8 @@ jobs:
              mkdir build
         echo cd build
              cd build
-        echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
-             set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+        echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\lib\pkgconfig
+             set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\lib\pkgconfig
         echo set eigen_prefix=%CONDA_PREFIX%\Library
              set eigen_prefix=%CONDA_PREFIX%\Library
         echo Configure using include_eigen
