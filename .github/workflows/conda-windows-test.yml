@@ -48,3 +48,14 @@ jobs:
              dir %CONDA_PREFIX%\Library\share\pkgconfig
         echo dir %CONDA_PREFIX%\Library\include\eigen3
              dir %CONDA_PREFIX%\Library\include\eigen3
+    - name: search for Eigen directory
+      shell: cmd /C CALL {0}
+      run: |
+        echo mkdir build
+             mkdir build
+        echo cd build
+             cd build
+        echo set  PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+             set  PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+        echo cmake -G "Visual Studio 16 2019"  -D include_eigen ..
+             cmake -G "Visual Studio 16 2019"  -D include_eigen ..
