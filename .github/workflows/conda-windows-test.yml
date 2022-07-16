@@ -42,7 +42,7 @@ jobs:
         echo CONDA_PREFIX = %CONDA_PREFIX%
         echo dir %CONDA_PREFIX%
              dir %CONDA_PREFIX%
-        echo cd %CONDA_PREFIX%
-             cd %CONDA_PREFIX%
-        echo dir
-             dir
+        echo dir %CONDA_PREFIX%/include
+             dir %CONDA_PREFIX%/include
+        echo dir %CONDA_PREFIX%/Library
+             dir %CONDA_PREFIX%/Library
