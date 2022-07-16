@@ -114,7 +114,7 @@ IF( cmake_install_postfix )
     )
 ENDIF( cmake_install_postfix )
 #
-FOREACH(pkg adolc eigen ipopt cppadcg)
+FOREACH(pkg adolc ipopt cppadcg)
     IF( ${pkg}_prefix )
         MESSAGE(FATAL_ERROR
             "-D ${pkg}_prefix=value has been changed to -D include_${pkg}=true"
@@ -289,7 +289,11 @@ SET(CMAKE_INSTALL_PREFIX "${cppad_prefix}"
 SET(system_include TRUE)
 #
 # eigen
-pkgconfig_info(eigen ${system_include})
+IF( ${include_eigen} )
+    pkgconfig_info(eigen ${system_include})
+ELSE( )
+    prefix_info(eigen ${system_include} )
+ENDIF( )
 #
 # adolc
 pkgconfig_info(adolc ${system_include})
