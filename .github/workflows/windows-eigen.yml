@@ -1,0 +1,61 @@
+name: conda - windows - test
+on:
+  push:
+    branches:
+      - workflow
+
+jobs:
+  build:
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install eigen
+      shell: cmd /C CALL {0}
+      run: |
+        echo call vcvarsall.bat
+         call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
+        REM
+        echo set prefix=%cd%\build\prefix
+             set prefix=%cd%\build\prefix
+        REM
+        echo clone eigen.git
+        git submodule add https://gitlab.com/libeigen/eigen.git eigen.git
+        REM
+        echo mkdir build
+             mkdir build
+        echo cd build
+             cd build
+        REM
+        echo configure Eigen
+        cmake ^
+          -G "NMake Makefiles" ^
+          -D CMAKE_INSTALL_PREFIX=%prefix% ^
+          -D INCLUDE_INSTALL_DIR=%prefix%\include ^
+          ..\eigen.git
+        REM
+        echo cmake --build . --target install
+             cmake --build . --target install
+        REM
+        echo dir %prefix%\include\Eigen
+             dir %prefix%\include\Eigen
+    - name: Build and test CppAD with Eigen
+      shell: cmd /C CALL {0}
+      run: |
+        echo call vcvarsall.bat
+         call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
+        REM
+        echo set prefix=%cd%\build\prefix
+             set prefix=%cd%\build\prefix
+        REM
+        echo cd build
+             cd build
+        echo Configure using eigen_prefix
+        cmake ^
+          -D CMAKE_BUILD_TYPE=release ^
+          -G "NMake Makefiles" ^
+          -D eigen_prefix=%prefix% ^
+          ..
+        REM Build and run tests.
+        echo cmake --build . --target check
+             cmake --build . --target check
