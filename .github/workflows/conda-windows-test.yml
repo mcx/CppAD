@@ -19,11 +19,11 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: conda_env
-    - name: Install cmake and eigen
+    - name: Install eigen
       shell: cmd /C CALL {0}
       run: |
-        echo conda install --yes cmake eigen
-             conda install --yes cmake eigen
+        echo conda install --yes eigen
+             conda install --yes eigen
     - name: Check location of Eigen directory
       shell: cmd /C CALL {0}
       run: |
@@ -41,7 +41,7 @@ jobs:
         echo Configure using eigen_prefix
         cmake ^
           -D CMAKE_BUILD_TYPE=release ^
-          -G "NMake Makefiles" -T "v142"  ^
+          -G "NMake Makefiles" ^
           -D eigen_prefix=%eigen_prefix% ^
           ..
         REM Build and run tests.
