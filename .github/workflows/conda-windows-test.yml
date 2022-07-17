@@ -14,7 +14,6 @@ jobs:
       run: |
         echo where cmake
         where cmake
-        echo PATH=%PATH%
 
     - uses: actions/checkout@v2
     - uses: conda-incubator/setup-miniconda@v2
@@ -33,6 +32,10 @@ jobs:
     - name: Build and test CppAD with Eigen
       shell: cmd /C CALL {0}
       run: |
+        echo call vcvarsall.bat
+        set dir=C:\Program Files (x86)\Microsoft Visual Studio\2019
+        set dir=%dir%Enterprise\VC\Auxiliary\Build
+        call "%dir%\vcvarsall.bat"
         echo where camke
              where cmake
         echo mkdir build
