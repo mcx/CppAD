@@ -32,6 +32,8 @@ jobs:
     - name: Build and test CppAD with Eigen
       shell: cmd /C CALL {0}
       run: |
+        echo where camke
+             where cmake
         echo mkdir build
              mkdir build
         echo cd build
