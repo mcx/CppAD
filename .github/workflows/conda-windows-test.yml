@@ -35,11 +35,9 @@ jobs:
         echo Configure using eigen_prefix
         cmake ^
           -D CMAKE_BUILD_TYPE=release ^
-          -G "Visual Studio 16 2019"  ^
+          -G "NMake Makefiles"  ^
           -D eigen_prefix=%eigen_prefix% ^
           ..
         REM Build and run tests.
-        echo cmake --build . --target ^
-          check_example check_introducttion check_speed
-        cmake --build . --target ^
-          check_example check_introducttion check_speed
+        echo cmake --build . --target check
+             cmake --build . --target check
