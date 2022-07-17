@@ -39,7 +39,23 @@ jobs:
           -D eigen_prefix=%eigen_prefix% ^
           ..
         REM Build and run tests.
-        echo cmake --build . --target check_test_more_deprecated
-             cmake --build . --target check_test_more_deprecated
-        echo cmake --build . --target check_test_more_general
-             cmake --build . --target check_test_more_general
+        echo cmake --build . --target ^
+          check_cppad_ipopt ^
+          check_example ^
+          check_introducttion ^
+          check_speed ^
+          check_test_more_compare_c ^
+          check_test_more_cppad_for_tmb ^
+          check_test_more_debuug_rel ^
+          check_test_more_depracted
+             cmake --build . --target ^
+          check_cppad_ipopt ^
+          check_example ^
+          check_introducttion ^
+          check_speed ^
+          check_test_more_compare_c ^
+          check_test_more_cppad_for_tmb ^
+          check_test_more_debuug_rel ^
+          check_test_more_depracted
+        echo cmake --build --target check_test_more_general
+             cmake --build --target check_test_more_general
