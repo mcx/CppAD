@@ -1,43 +1,70 @@
 name: conda - windows - test
 on:
+  pull_request:
   push:
     branches:
       - workflow
 
 jobs:
   build:
+
     runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v2
-    - uses: conda-incubator/setup-miniconda@v2
+    - uses: goanpeca/setup-miniconda@v1
       with:
-        activate-environment: conda_env
+        activate-environment: cppad
+
     - name: Install cmake and eigen
       shell: cmd /C CALL {0}
       run: |
-        echo conda install --yes cmake eigen
-             conda install --yes cmake eigen
-    - name: Check location of Eigen directory
+        conda install --yes cmake eigen
+
+    - name: Check location of eigen3.pc file and Eigen directory
       shell: cmd /C CALL {0}
       run: |
-        echo dir %CONDA_PREFIX%\Library\include\Eigen
-             dir %CONDA_PREFIX%\Library\include\Eigen
-    - name: Build and test CppAD with Eigen
+        echo dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
+             dir %CONDA_PREFIX%\Library\share\pkgconfig\eigen3.pc
+        echo dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
+             dir %CONDA_PREFIX%\Library\include\eigen3\Eigen
+
+    - name: Configure with include_eigen
       shell: cmd /C CALL {0}
       run: |
         echo mkdir build
              mkdir build
         echo cd build
              cd build
-        echo set eigen_prefix=%CONDA_PREFIX%\Library
-             set eigen_prefix=%CONDA_PREFIX%\Library
-        echo Configure using eigen_prefix
+        echo set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+             set PKG_CONFIG_PATH=%CONDA_PREFIX%\Library\share\pkgconfig
+        echo cmake ^
+          -G "Visual Studio 16 2019"  ^
+          -D include_eigen=true ^
+          -D cmake_install_includedirs=include;eigen3 ^
+          ..
         cmake ^
-          -D CMAKE_BUILD_TYPE=release ^
+          -G "Visual Studio 16 2019"  ^
+          -D include_eigen=true ^
+          -D cmake_install_includedirs=include;eigen3 ^
+          ..
+
+    - name: Configure, build, and test with eigen_prefix
+      shell: cmd /C CALL {0}
+      run: |
+        echo cd build
+             cd build
+        echo set eigen_prefix=%CONDA_PREFIX%\Library\include
+             set eigen_prefix=%CONDA_PREFIX%\Library\include
+        echo cmake ^
           -G "Visual Studio 16 2019"  ^
           -D eigen_prefix=%eigen_prefix% ^
+          -D cmake_install_includedirs=include;eigen3 ^
           ..
-        REM Bulild and run tests
-        echo cmake --build . --target check_test_more_general
-             cmake --build . --target check_test_more_general
+        cmake ^
+          -G "Visual Studio 16 2019"  ^
+          -D eigen_prefix=%eigen_prefix% ^
+          -D cmake_install_includedirs=include;eigen3 ^
+          ..
+        echo cmake --build . --target check --parallel 1
+             cmake --build . --target check --parallel 1

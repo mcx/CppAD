@@ -31,7 +31,6 @@ IF( cppad_has_ipopt )
 ELSE( cppad_has_ipopt )
     SET(ipopt_sources "")
 ENDIF( cppad_has_ipopt )
-print_variable(eigen_sources)
 #
 # BEGIN_SORT_THIS_LINE_PLUS_5
 SET(source_list
