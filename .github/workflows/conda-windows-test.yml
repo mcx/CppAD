@@ -33,9 +33,7 @@ jobs:
       shell: cmd /C CALL {0}
       run: |
         echo call vcvarsall.bat
-        set dir=C:\Program Files (x86)\Microsoft Visual Studio\2019
-        set dir=%dir%Enterprise\VC\Auxiliary\Build
-        call "%dir%\vcvarsall.bat"
+         call "%programfiles(x86)%\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64
         echo where camke
              where cmake
         echo mkdir build
