@@ -38,6 +38,8 @@ jobs:
           -G "Visual Studio 16 2019"  ^
           -D eigen_prefix=%eigen_prefix% ^
           ..
-        REM Bulild and run tests
-        echo cmake --build . --target check_test_more
-             cmake --build . --target check_test_more
+        REM Build and run tests.
+        echo cmake --build . --target check_test_more_deprecated
+             cmake --build . --target check_test_more_deprecated
+        echo cmake --build . --target check_test_more_general
+             cmake --build . --target check_test_more_general
