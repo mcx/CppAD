@@ -47,7 +47,7 @@ jobs:
           check_test_more_compare_c ^
           check_test_more_cppad_for_tmb ^
           check_test_more_debuug_rel ^
-          check_test_more_depracted
+          check_test_more_deprecated
              cmake --build . --target ^
           check_cppad_ipopt ^
           check_example ^
@@ -56,6 +56,6 @@ jobs:
           check_test_more_compare_c ^
           check_test_more_cppad_for_tmb ^
           check_test_more_debuug_rel ^
-          check_test_more_depracted
+          check_test_more_deprecated
         echo cmake --build --target check_test_more_general
              cmake --build --target check_test_more_general
